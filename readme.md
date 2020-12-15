@@ -1,9 +1,11 @@
-To build and publish an image;
+To build an image:
 
 ```shell script
-docker build -f ${PWD}/php74.Dockerfile -t vapor-php74:latest .
+./build.sh php74
+```
 
-docker tag vapor-php74:latest laravelphp/vapor:php74
+To build and publish an image:
 
-docker push laravelphp/vapor:php74
+```shell script
+./build.sh php74 -p
 ```
