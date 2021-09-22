@@ -19,6 +19,7 @@ RUN apk --update add \
   imagemagick-dev \
   imagemagick \
   postgresql-dev \
+  ca-certificates \
   libzip-dev \
   gettext-dev \
   libxslt-dev \
@@ -51,7 +52,7 @@ RUN docker-php-ext-configure gd --with-freetype=/usr/lib/ --with-jpeg=/usr/lib/ 
 
 RUN docker-php-ext-enable redis
 
-RUN cp "/etc/ssl/cert.pem" /opt/cert.pem
+RUN update-ca-certificates
 
 COPY runtime/bootstrap /opt/bootstrap
 COPY runtime/bootstrap.php /opt/bootstrap.php
