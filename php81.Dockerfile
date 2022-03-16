@@ -25,6 +25,8 @@ RUN apk --update add \
   libgcrypt-dev &&\
   rm /var/cache/apk/*
 
+RUN apk --no-cache upgrade libxml2-dev
+
 RUN pecl channel-update pecl.php.net && \
     pecl install mcrypt redis-5.3.4 && \
     rm -rf /tmp/pear
