@@ -26,7 +26,7 @@ RUN apk --update add \
   rm /var/cache/apk/*
 
 RUN pecl channel-update pecl.php.net && \
-    pecl install mcrypt redis-5.3.4 && \
+    pecl install mcrypt redis-5.3.6 && \
     rm -rf /tmp/pear
 
 RUN docker-php-ext-install \
