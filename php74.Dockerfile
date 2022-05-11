@@ -26,7 +26,7 @@ RUN apk --update add \
   rm /var/cache/apk/*
 
 RUN pecl channel-update pecl.php.net && \
-    pecl install mcrypt imagick redis-5.3.2 && \
+    pecl install mcrypt imagick redis-5.3.7 && \
     rm -rf /tmp/pear
 
 RUN docker-php-ext-install \
