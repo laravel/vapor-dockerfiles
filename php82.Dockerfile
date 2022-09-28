@@ -29,6 +29,11 @@ RUN pecl channel-update pecl.php.net && \
     pecl install mcrypt redis-5.3.7 && \
     rm -rf /tmp/pear
 
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions sockets
+
 RUN docker-php-ext-install \
     mysqli \
     mbstring \
@@ -42,7 +47,6 @@ RUN docker-php-ext-install \
     intl \
     gettext \
     soap \
-    # sockets \
     xsl
 
 RUN docker-php-ext-configure gd --with-freetype=/usr/lib/ --with-jpeg=/usr/lib/ && \
