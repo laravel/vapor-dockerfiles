@@ -1,29 +1,29 @@
 FROM --platform=linux/amd64 php:8.2.0RC3-fpm-alpine
 
 RUN apk --update add \
-  wget \
-  curl \
-  build-base \
-  libmcrypt-dev \
-  libxml2-dev \
-  pcre-dev \
-  zlib-dev \
-  autoconf \
-  oniguruma-dev \
-  openssl \
-  openssl-dev \
-  freetype-dev \
-  libjpeg-turbo-dev \
-  jpeg-dev \
-  libpng-dev \
-  imagemagick-dev \
-  imagemagick \
-  postgresql-dev \
-  libzip-dev \
-  gettext-dev \
-  libxslt-dev \
-  libgcrypt-dev &&\
-  rm /var/cache/apk/*
+    wget \
+    curl \
+    build-base \
+    libmcrypt-dev \
+    libxml2-dev \
+    pcre-dev \
+    zlib-dev \
+    autoconf \
+    oniguruma-dev \
+    openssl \
+    openssl-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    jpeg-dev \
+    libpng-dev \
+    imagemagick-dev \
+    imagemagick \
+    postgresql-dev \
+    libzip-dev \
+    gettext-dev \
+    libxslt-dev \
+    libgcrypt-dev &&\
+    rm /var/cache/apk/*
 
 RUN pecl channel-update pecl.php.net && \
     pecl install mcrypt redis-5.3.7 && \
