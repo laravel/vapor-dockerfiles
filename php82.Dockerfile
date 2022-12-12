@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 php:8.2.0RC5-fpm-alpine
+FROM --platform=linux/amd64 php:8.2-fpm-alpine
 
 RUN apk --update add \
     wget \
