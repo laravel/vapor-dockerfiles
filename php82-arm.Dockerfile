@@ -25,6 +25,7 @@ RUN apk --update add \
     libjpeg-turbo-dev \
     jpeg-dev \
     libpng-dev \
+    libwebp-dev \
     imagemagick-dev \
     imagemagick \
     postgresql-dev \
@@ -55,7 +56,7 @@ RUN docker-php-ext-install \
     sockets \
     xsl
 
-RUN docker-php-ext-configure gd --with-freetype=/usr/lib/ --with-jpeg=/usr/lib/ && \
+RUN docker-php-ext-configure gd --with-freetype=/usr/lib/ --with-jpeg=/usr/lib/ --with-webp=/usr/lib/ && \
     docker-php-ext-install gd
 
 RUN docker-php-ext-enable redis
