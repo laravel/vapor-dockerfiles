@@ -1,12 +1,12 @@
 #!/bin/bash
 
-PHP_VERSION=$1
-PUBLISH=$2
+PHP_VERSION=php82-arm
+PUBLISH=true
 
 docker build -f ${PWD}/${PHP_VERSION}.Dockerfile -t vapor-${PHP_VERSION}:latest .
 
-docker tag vapor-${PHP_VERSION}:latest laravelphp/vapor:${PHP_VERSION}
+docker tag vapor-${PHP_VERSION}:latest 774901956562.dkr.ecr.us-east-1.amazonaws.com/vapor:${PHP_VERSION}
 
 if [ -n "$PUBLISH" ]; then
-  docker push laravelphp/vapor:${PHP_VERSION}
+  docker push 774901956562.dkr.ecr.us-east-1.amazonaws.com/vapor:${PHP_VERSION}
 fi
