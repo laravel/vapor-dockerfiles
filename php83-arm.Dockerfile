@@ -1,4 +1,13 @@
-FROM --platform=linux/amd64 php:8.2-fpm-alpine
+FROM --platform=linux/arm64 php:8.3.0RC3-fpm-alpine
+
+ONBUILD ARG __VAPOR_RUNTIME=
+ONBUILD RUN if [ -z "$__VAPOR_RUNTIME" ] ; then \
+    echo "No runtime provided. Please upgrade to the latest version of laravel/vapor-cli." ; \
+    exit 1 ; \
+    elif [ "$__VAPOR_RUNTIME" != "docker-arm" ] ; then \
+    echo "The provided runtime [$__VAPOR_RUNTIME] is not supported by the vapor:php82-arm base image." ; \
+    exit 1 ; \
+    fi
 
 RUN apk --update add \
     wget \
@@ -27,7 +36,7 @@ RUN apk --update add \
     rm /var/cache/apk/*
 
 RUN pecl channel-update pecl.php.net && \
-    pecl install mcrypt redis-5.3.7 && \
+    pecl install mcrypt redis-6.0.1 && \
     rm -rf /tmp/pear
 
 RUN docker-php-ext-install \

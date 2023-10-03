@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 php:8.2-fpm-alpine
+FROM --platform=linux/amd64 php:8.3.0RC3-fpm-alpine
 
 RUN apk --update add \
     wget \
@@ -27,7 +27,7 @@ RUN apk --update add \
     rm /var/cache/apk/*
 
 RUN pecl channel-update pecl.php.net && \
-    pecl install mcrypt redis-5.3.7 && \
+    pecl install mcrypt redis-6.0.1 && \
     rm -rf /tmp/pear
 
 RUN docker-php-ext-install \
