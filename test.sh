@@ -44,5 +44,5 @@ done
 echo
 
 echo "+--------------------------------------------------------"
-echo "| Finshed tests. All tests passed"
+echo "| Finished tests. All tests passed"
 echo "+--------------------------------------------------------"
