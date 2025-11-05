@@ -57,6 +57,12 @@ COPY runtime/bootstrap /opt/bootstrap
 COPY runtime/bootstrap.php /opt/bootstrap.php
 COPY runtime/php.ini /usr/local/etc/php/php.ini
 
+# Sometimes opcache is already included via /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+# but we add it if not
+RUN if ! php -m | grep -q "Zend OPcache"; then \
+       echo "zend_extension=opcache.so" >> /usr/local/etc/php/php.ini; \
+   fi
+
 RUN chmod 755 /opt/bootstrap
 RUN chmod 755 /opt/bootstrap.php
 
