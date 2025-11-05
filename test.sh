@@ -16,7 +16,7 @@ fi
 echo
 
 echo "+--------------------------------------------------------"
-echo "| TEST: test no extension is duplicated"
+echo "| TEST: No extension is duplicated"
 echo "+--------------------------------------------------------"
 for phpVersion in "${PHP_VERSIONS[@]}"; do
     echo "Processing $phpVersion"
