@@ -4,7 +4,7 @@ set -e
 
 BUILD=$1
 
-PHP_VERSIONS=("php82" "php82-arm" "php83" "php83-arm" "php84" "php84-arm")
+PHP_VERSIONS=("php82" "php82-arm" "php83" "php83-arm" "php84" "php84-arm" "php85" "php85-arm")
 
 if [ -n "$BUILD" ]; then
   for phpVersion in "${PHP_VERSIONS[@]}"; do
