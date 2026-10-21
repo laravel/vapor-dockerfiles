@@ -3,7 +3,7 @@
 PHP_VERSION=$1
 PUBLISH=$2
 
-docker build -f ${PWD}/${PHP_VERSION}.Dockerfile -t vapor-${PHP_VERSION}:latest .
+docker build --pull -f ${PWD}/${PHP_VERSION}.Dockerfile -t vapor-${PHP_VERSION}:latest .
 
 docker tag vapor-${PHP_VERSION}:latest laravelphp/vapor:${PHP_VERSION}
 
