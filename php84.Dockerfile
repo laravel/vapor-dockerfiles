@@ -51,6 +51,9 @@ RUN docker-php-ext-configure gd --with-freetype=/usr/lib/ --with-jpeg=/usr/lib/ 
 
 RUN docker-php-ext-enable redis
 
+COPY --from=mlocati/php-extension-installer:2 /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions relay-0.30.0
+
 RUN cp "/etc/ssl/cert.pem" /opt/cert.pem
 
 COPY runtime/bootstrap /opt/bootstrap
