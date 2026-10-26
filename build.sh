@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 PHP_VERSION=$1
 PUBLISH=$2
 

@@ -1,5 +1,10 @@
 FROM --platform=linux/amd64 php:8.4-fpm-alpine
 
+# The php base image lags Alpine's package repository, so upgrade what it ships
+# before adding anything else, and require a minimum brotli-libs version.
+RUN apk upgrade --no-cache && \
+    apk add --no-cache 'brotli-libs>=1.2.1-r0'
+
 RUN apk --update add \
     wget \
     curl \
