@@ -44,5 +44,27 @@ done
 echo
 
 echo "+--------------------------------------------------------"
+echo "| TEST: brotli-libs is at least 1.2.1-r0"
+echo "+--------------------------------------------------------"
+for phpVersion in "${PHP_VERSIONS[@]}"; do
+    echo "Processing $phpVersion"
+
+    result=$(docker run --rm vapor-$phpVersion:latest sh -c \
+        'v=$(apk list --installed brotli-libs 2>/dev/null | cut -d" " -f1 | sed "s/^brotli-libs-//"); echo "$v $(apk version -t "$v" 1.2.1-r0)"')
+
+    if [ "${result#* }" = "<" ]; then
+        echo "Error found: brotli-libs ${result% *} is older than 1.2.1-r0 in $phpVersion"
+        exit 1
+    fi
+
+    if ! docker run --rm vapor-$phpVersion:latest sh -c 'ldd /usr/lib/libcurl.so.4 | grep -q libbrotlidec'; then
+        echo "Error found: libcurl is not linked against libbrotlidec in $phpVersion"
+        exit 1
+    fi
+done
+
+echo
+
+echo "+--------------------------------------------------------"
 echo "| Finished tests. All tests passed"
 echo "+--------------------------------------------------------"
