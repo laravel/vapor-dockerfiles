@@ -5,14 +5,9 @@ ONBUILD RUN if [ -z "$__VAPOR_RUNTIME" ] ; then \
     echo "No runtime provided. Please upgrade to the latest version of laravel/vapor-cli." ; \
     exit 1 ; \
     elif [ "$__VAPOR_RUNTIME" != "docker-arm" ] ; then \
-    echo "The provided runtime [$__VAPOR_RUNTIME] is not supported by the vapor:php85-arm base image." ; \
+    echo "The provided runtime [$__VAPOR_RUNTIME] is not supported by the vapor:php86-arm base image." ; \
     exit 1 ; \
     fi
-
-# The php base image lags Alpine's package repository, so upgrade what it ships
-# before adding anything else, and require a minimum brotli-libs version.
-RUN apk upgrade --no-cache && \
-    apk add --no-cache 'brotli-libs>=1.2.1-r0'
 
 RUN apk --update add \
     wget \
@@ -40,9 +35,11 @@ RUN apk --update add \
     linux-headers && \
     rm /var/cache/apk/*
 
-RUN pecl channel-update pecl.php.net && \
-    pecl install redis-6.3.0 && \
-    rm -rf /tmp/pear
+RUN curl -fsSL -o /usr/local/bin/pie \
+    https://github.com/php/pie/releases/latest/download/pie.phar \
+    && chmod +x /usr/local/bin/pie
+
+RUN pie install --no-cache phpredis/phpredis:dev-develop
 
 RUN docker-php-ext-install \
     mysqli \
@@ -62,8 +59,6 @@ RUN docker-php-ext-install \
 
 RUN docker-php-ext-configure gd --with-freetype=/usr/lib/ --with-jpeg=/usr/lib/ && \
     docker-php-ext-install gd
-
-RUN docker-php-ext-enable redis
 
 RUN cp "/etc/ssl/cert.pem" /opt/cert.pem
 
