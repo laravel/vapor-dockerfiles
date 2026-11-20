@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 php:8.3-fpm-alpine
+FROM --platform=linux/amd64 php:8.3.37-fpm-alpine
 
 # The php base image lags Alpine's package repository, so upgrade what it ships
 # before adding anything else, and require a minimum brotli-libs version.
